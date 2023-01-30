@@ -1,0 +1,109 @@
+@use "sass:math";
+
+/*
+    Сетки. Состоят из контейнера сетки и ячеек внутри него.
+    Отступы между ячейками достигаются паддингами у ячеек, а для компенсации
+    паддингов по краям у контейнера используются отрицательные маргины на величину паддинга.
+    Таким образом контент ячеек правильно выровнен по краям контейнера.
+
+    Иллюстрация (Символом # помечены паддинги):
+
+    | Основной контент   | <- Граница контента
+    |____________________|
+   #|        |##|        |# <- Паддинги вне линии контента
+   #| Ячейка |##| Ячейка |#    т.к. их компенсировали отрицательные маргины
+   #|________|##|________|#
+    |                    |
+
+    Пример создания сетки по 2 ячейки в строку и отступами между ячейками 12px:
+    .my-grid {
+        @include ui-kit-grid($gutterH: 12px, $gutterV: 12px);
+
+        &__item {
+            width: 50%;
+        }
+    }
+*/
+
+/*
+    Создает отступы между ячейками сетки.
+    Если в качестве отступа передать null - отступ не будет создан или переопределен
+
+    @param {number | null} gutterH - отступ между ячейками по горизонтали
+    @param {number | null} gutterV - отступ между ячейками по вертикали
+ */
+@mixin grid-gutters($gutterH: null, $gutterV: null) {
+    @if ($gutterH != null) {
+        margin-left: - math.div($gutterH, 2);
+        margin-right: - math.div($gutterH, 2);
+    }
+    @if ($gutterV != null) {
+        margin-bottom: - math.div($gutterV, 2);
+        margin-top: - math.div($gutterV, 2);
+    }
+
+    /*
+        Если ячеек нет - делаем распорку
+        К сожалению работает только если внутри совсем ничего нет, даже пробела
+    */
+    @if ($gutterV != 0 and $gutterV != null) {
+        &:empty::after {
+            content: '';
+            height: $gutterV;
+        }
+    }
+
+    & > * {
+        @if ($gutterH != null) {
+            padding-left: math.div($gutterH, 2);
+            padding-right: math.div($gutterH, 2);
+        }
+        @if ($gutterV != null) {
+            padding-bottom: math.div($gutterV, 2);
+            padding-top: math.div($gutterV, 2);
+        }
+    }
+}
+
+/*
+    Создает ячейку сетки
+*/
+@mixin grid-item() {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: auto;
+    /*
+        Костыли для IE
+        Проблема во вложенных флексах, IE растягивает контейнеры
+        в зависимости от контента пока не указать min размеры,
+        причем указать их надо с размерностью.
+     */
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/*
+    Создает сетку
+    Все непосредственно вложенные элементы станут ячейками сетки
+    Ячейка не может являться сеткой,
+    если нужно делать вложенные сетки - создавай новый элемент с сеткой внутри ячейки
+
+    @param {number | null} gutterH - отступ между ячейками по горизонтали
+    @param {number | null} gutterV - отступ между ячейками по вертикали
+    @param {boolean} inline        - делает сетку, размер которой зависит от контента (inline-flex)
+*/
+@mixin grid($gutterH: null, $gutterV: null, $inline: false) {
+    @if ($inline) {
+        display: inline-flex;
+        vertical-align: top; // Избавляет от магических вертикальных отступов при $gutterV > 0
+    } @else {
+        display: flex;
+    }
+    flex-wrap: wrap;
+    @include  grid-gutters($gutterH, $gutterV);
+
+    & > * {
+        @include  grid-item;
+    }
+}

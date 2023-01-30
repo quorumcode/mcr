@@ -1,0 +1,14 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = "Email Verification"
+    - var illustrationUrl = `${imageBucketUrl}/illustration1.png`
+
+block content
+    p Dear #{name},
+    br 
+    p Thank you for creating an account with My Client Reviews.
+    br 
+    p To complete the Account Creation process, please click on the link below to verify your email address.
+    .center-block(style="margin-top: 80px;")
+        a.button(href=url) Verify Email

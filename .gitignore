@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.idea
+/data
+.env.dev
+.env.prod
+env.dev
+end.prod
+.vscode
+vetur.config.js

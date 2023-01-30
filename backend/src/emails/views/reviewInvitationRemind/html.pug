@@ -1,0 +1,12 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = "Review Invitation Reminder"
+    - var illustrationUrl = `${imageBucketUrl}/illustration4.png`
+    - var teamAt = businessName
+
+block content
+    p #{text}
+    .center-block(style="margin-top: 80px; margin-bottom: 40px;")
+        a.button(href=url) Leave Review
+    p By writing about your experience, it can be a big help to other customers.

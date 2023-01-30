@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="249" height="234" fill="none" viewBox="0 0 249 234">
+    <defs/>
+    <path fill="url(#paint0_linear)" fill-rule="evenodd" d="M180.8 0h-146L7.2 193.3.5 229.6H12l5-30.5h135.2L180.8 0z" clip-rule="evenodd"/>
+    <path fill="url(#paint1_linear)" fill-rule="evenodd" d="M34.9 0h146L238 199.1h-.2l10.2 34.9h-14.3l-10.2-34.9H105.7L115 234h-14.3l-14.3-53.8h.3L34.9 0z" clip-rule="evenodd"/>
+    <ellipse fill="url(#paint2_linear)" rx="33.7" ry="42.8" transform="matrix(.94922 -.31463 .30601 .95203 142.9 99.3)"/>
+    <defs>
+        <linearGradient id="paint0_linear" x1="-27.2" x2="21.7" y1="186" y2="186.7" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F4D156"/>
+            <stop offset="1" stop-color="#E09707"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear" x1="239.5" x2="263.8" y1="182.4" y2="232.7" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFE68D"/>
+            <stop offset="1" stop-color="#FFBC3A"/>
+        </linearGradient>
+        <linearGradient id="paint2_linear" x1="137.6" x2="95" y1="-43.2" y2="153.6" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFE68D"/>
+            <stop offset="1" stop-color="#FFBC3A"/>
+        </linearGradient>
+    </defs>
+</svg>

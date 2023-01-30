@@ -1,0 +1,133 @@
+@import './_util.scss';
+
+/*
+    Интервал для responsive-media
+    @typedef {string | List.<string | number>} Interval - имя интервала либо список из двух значений
+ */
+
+// Интервалы (ОТ и ПО)
+$responsive-intervals: (
+    xs: (0, 544px),
+    sm: (545px, 768px),
+    md: (769px, 1039px),
+    lg: (1040px, 1263px),
+    xl: (1264px, infinite),
+) !default;
+
+// Возвращает значение ОТ интервала
+@function _responsive-get-interval-start($intervalName) {
+    $value: map_get($responsive-intervals, $intervalName);
+
+    @if ($value == null) {
+        @error('Несуществующий интервал - "#{$intervalName}"');
+    } @else {
+        @return nth($value, 1);
+    }
+}
+
+// Возвращает значение ПО интервала
+@function _responsive-get-interval-end($intervalName) {
+    $value: map_get($responsive-intervals, $intervalName);
+
+    @if ($value == null) {
+        @error('Несуществующий интервал - "#{$intervalName}"');
+    } @else {
+        @return nth($value, 2);
+    }
+}
+
+/*
+    На вход получает список интервалов и возвращает список
+    media выражений для этих интервалов
+
+    @private
+    @param {List.<Interval>} intervals - список интервалов
+    @return {List.<string>}
+*/
+@function _responsive-parse-media($intervals...) {
+    $result: ();
+
+    @each $interval in $intervals {
+        $firstPoint: null; // Сюда поместим точку ОТ интервала
+        $secondPoint: null; // Сюда поместим точку ПО интервала
+
+        /*
+            Если интервал представлен массивом - значит группа ОТ и ПО
+            Может быть в следующем виде:
+            (xs, md)        - указано 2 интервала, мы должны взять точки ОТ xs ПО md
+            (xs, 1200px)    - указан интервал и число, мы должны взять точку ОТ xs и 1200px
+            (320px, 1200px) - указано 2 числа, берем как есть
+        */
+        @if (type_of($interval) == 'list') {
+            $point1: nth($interval, 1);
+            $point2: nth($interval, 2);
+
+            @if ($point1 == null or $point2 == null) {
+                @error 'Для интервала "#{$interval}" должны быть указаны 2 параметра';
+            }
+
+            /*
+                Преобразуем первую точку,
+                если точка = имя интервала - превращаем ее в значение ОТ интервала
+                если точка = число - оставляем числом
+            */
+            @if (type-of($point1) == 'number') {
+                $firstPoint: $point1;
+            } @else {
+                $firstPoint: _responsive-get-interval-start($point1);
+            }
+
+            /*
+                Преобразуем вторую точку,
+                если точка = имя интервала - превращаем ее в значение ПО интервала
+                если точка = число или бесконечность - оставляем числом или бесконечностью
+            */
+            @if (type-of($point2) == 'number' or $point2 == infinite) {
+                $secondPoint: $point2;
+            } @else {
+                $secondPoint: _responsive-get-interval-end($point2);
+            }
+        // Если интервал строка (имя интервала) - берем точки ОТ и ПО этого интервала
+        } @else if (type_of($interval) == 'string') {
+            $firstPoint: _responsive-get-interval-start($interval);
+            $secondPoint: _responsive-get-interval-end($interval);
+        }
+
+        /*
+            По точкам формируем строки с media выражениями с min-width, max-width.
+            Если вторая точка infinite - для нее не нужно формировать max-width
+        */
+        @if ($secondPoint == infinite) {
+            $result: append($result, 'all and (min-width: #{$firstPoint})', comma);
+        } @else {
+            $result: append($result, 'all and (min-width: #{$firstPoint}) and (max-width: #{$secondPoint})', comma);
+        }
+    }
+
+    @return $result;
+}
+
+/*
+    Создает медиа выражение, которое будет применено на указанных интервалах
+    Пример использования:
+        .my-class {
+            padding: 20px;
+            @include responsive-media(sm) {
+                padding: 10px;
+            }
+        }
+    Примеры аргументов:
+        md
+        sm, lg
+        sm, md, lg
+        (sm, lg)
+        (md, 1500px)
+        sm, (lg, 2000px)
+
+    @param {List.<Interval>} intervals - список интервалов
+*/
+@mixin responsive-media($intervals...) {
+    @media #{util-implode(_responsive-parse-media($intervals...), ', ')} {
+        @content;
+    }
+}

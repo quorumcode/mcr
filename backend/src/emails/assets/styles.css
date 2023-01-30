@@ -1,0 +1,164 @@
+/* ### Layout styles start */
+.layout {
+  padding: 0 24px 24px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #0f1441;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.layout__main-logo {
+  display: inline-block;
+  line-height: 0;
+  margin-bottom: 20px;
+}
+
+.layout__main-logo-image {
+  width: 100px;
+}
+
+.layout__illustration {
+  margin-bottom: 36px;
+}
+
+.layout__title {
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.layout__regards {
+  margin-top: 40px;
+}
+
+.layout__footer {
+  margin-top: 100px;
+}
+
+.footer__text {
+  margin: 24px 0;
+}
+/* ### Layout styles end */
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 38px;
+  color: #1e2b99;
+}
+
+.center-block {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 28px;
+  background: linear-gradient(121.42deg, #ffda55 18.96%, #ec9f0b 89.2%);
+  box-shadow: 10px 10px 20px rgba(30, 43, 153, 0.25);
+  border-radius: 10px;
+  color: #0f1441;
+  text-align: center;
+  padding: 12px 24px;
+  min-width: 232px;
+  text-decoration: none;
+}
+
+.button._control {
+  background: #1e2b99;
+  color: #fff;
+  box-shadow: none;
+}
+
+.link {
+  color: #1e2b99;
+  text-decoration: none;
+  font-style: italic;
+}
+
+.review {
+  position: relative;
+  background-color: #f7f7fb;
+  border-radius: 20px;
+  padding: 12px;
+}
+
+.review._green {
+  background-color: #eefaeb;
+}
+
+.review._green .review-header__name {
+  color: #429827;
+  font-size: 14px;
+}
+
+.review._overlay {
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.review__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, #fff);
+}
+
+.review__header {
+  margin-bottom: 12px;
+}
+
+.review__message {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.review-header {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.review-header td {
+  vertical-align: top;
+}
+
+.review-header__end {
+  text-align: right;
+  white-space: nowrap;
+}
+.review-header__name {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 28px;
+  color: #1e2b99;
+}
+
+.review-header__date {
+  font-size: 12px;
+  line-height: 20px;
+  color: #757dc0;
+}
+
+.review-header__rate {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 28px;
+  margin-right: 4px;
+  vertical-align: baseline;
+}
+
+.review-header__star {
+  vertical-align: baseline;
+  margin-bottom: -3px;
+}
+
+.review-header__icon {
+  margin-right: 8px;
+  vertical-align: baseline;
+  margin-bottom: -6px;
+}

@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./frontend/src:/home/node/app/frontend/src
+    expose:
+      - 24678
+      - 3000
+    ports:
+      - 3000:3000
+      - 24678:24678
+    #env_file: ./frontend/.env
+    command: yarn dev

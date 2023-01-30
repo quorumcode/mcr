@@ -1,0 +1,33 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = "Business Response"
+    - var teamAt = businessName
+
+block content
+    .review._green(style="margin-bottom: 40px;")
+        table.review__header.review-header
+            tr
+                td.review-header__start
+                    .review-header__date #{formattedReplyDate}
+        .review__message #{replyMessage}
+
+    .review._overlay(style="margin-bottom: 40px;")
+        table.review__header.review-header
+            tr
+                td.review-header__start
+                    .review-header__name #{clientName}
+                    .review-header__date #{formattedReviewDate}
+                td.review-header__end
+                    .review-header__rate #{formattedReviewRate}
+                    - var n = 1;
+                    while n <= 5
+                        if reviewRate >= n++
+                            img.review-header__star(src=`${imageBucketUrl}/star-yellow.png`)
+                        else
+                            img.review-header__star(src=`${imageBucketUrl}/star-gray.png`)
+        .review__message #{reviewMessage}
+        .review__overlay
+
+    .center-block
+        a.button._control(href=reviewUrl) Show my Review

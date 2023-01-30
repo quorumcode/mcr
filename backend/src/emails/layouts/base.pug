@@ -1,0 +1,30 @@
+block variables
+
+- teamAt = teamAt || "MyClientReviews.com.au"
+- logoUrl = logoUrl || `${imageBucketUrl}/logo.png`
+html
+    head
+        link(rel="stylesheet", href="styles.css", data-inline)
+    body
+        .layout
+            a.layout__main-logo(href=frontendBaseUrl)
+                img.layout__main-logo-image(src=logoUrl)
+
+            if illustrationUrl
+                .email__illustration.center-block
+                    img(src=illustrationUrl)
+
+            h1.email__title.title #{title}
+
+            block content
+
+            .layout__regards
+                block thanks
+                | Kind regards
+                br
+                a.link(href=frontendBaseUrl) The Team at #{teamAt}
+
+            .layout__footer.footer
+                .footer__text.center-block This message was sent to you by “My Client Reviews”.
+                .center-block
+                    img(src=`${imageBucketUrl}/logo-gray.png`)

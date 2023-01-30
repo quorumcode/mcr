@@ -1,0 +1,22 @@
+/*
+    Конвертирует список значений в строку.
+    В javascript эквивалентно join.
+
+    @param {List} pieces - список или мапа
+    @param {string} glue       - разделитель
+*/
+@function util-implode($pieces, $glue: '') {
+    $result: '';
+
+    @for $i from 1 through length($pieces) {
+        $piece: nth($pieces, $i);
+        $result: unquote('#{$result}#{$glue}#{$piece}');
+    }
+
+    // Если результат не пустой - мы должны из начала строки вырезать лишний $glue
+    @if $result != '' {
+        $result: str-slice($result, str-length($glue) + 1, -1);
+    }
+
+    @return $result;
+}

@@ -1,0 +1,16 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = "We Would Really Appreciate Your Feedback"
+    - var illustrationUrl = `${imageBucketUrl}/illustration3.png`
+    - var teamAt = businessName
+
+block content
+    p #{text}
+    .center-block(style="margin-top: 80px; margin-bottom: 40px;")
+        a.button(href=url) Leave Review
+    p By writing about your experience, it can be a big help to other customers.
+
+block thanks
+    | Thank you so much. It means a lot to us.
+    br

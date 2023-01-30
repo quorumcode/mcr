@@ -1,0 +1,9 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = `Support ticket from ${email}`
+
+block content
+    p #{email} wrote:
+    p #{body}
+    p Reply to this thread to add more details..

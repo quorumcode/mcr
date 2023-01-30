@@ -1,0 +1,17 @@
+@import "@/styles/color.scss";
+@import "@/styles/rounding.scss";
+@import "@/styles/shadow.scss";
+
+@mixin component-content-wrapper {
+  max-width: 1224px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+@mixin component-card {
+  @include shadow-large;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: $color-white;
+  border-radius: $rounding-large;
+}

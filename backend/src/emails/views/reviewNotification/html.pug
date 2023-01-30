@@ -1,0 +1,28 @@
+extends ../../layouts/base.pug
+
+block variables
+    - var title = "New Review Posted"
+
+block content
+    p(style="margin-bottom: 12px;") #{clientName} has posted a new #{formattedRate} star review:
+
+    .review(style="margin-bottom: 40px;")
+        table.review__header.review-header
+            tr
+                td.review-header__start
+                    .review-header__name #{clientName}
+                    .review-header__date #{formattedDate}
+                td.review-header__end
+                    .review-header__rate #{formattedRate}
+                    - var n = 1;
+                    while n <= 5
+                        if rate >= n++
+                            img.review-header__star(src=`${imageBucketUrl}/star-yellow.png`)
+                        else
+                            img.review-header__star(src=`${imageBucketUrl}/star-gray.png`)
+        .review__message #{message}
+
+    p(style="margin-bottom: 40px;") Click on the button below to post your comments on the review:
+
+    .center-block
+        a.button(href=replyUrl) Respond

@@ -1,0 +1,38 @@
+import { FastifyPluginAsync } from "fastify";
+import { routeOfChangePassword } from "./routeOfChangePassword";
+import { routeOfGetUserById } from "./routeOfGetUserById";
+import { routeOfLogin } from "./routeOfLogin";
+import { routeOfMyInfo } from "./routeOfMyInfo";
+import { routeOfRegister } from "./routeOfRegister";
+import { routeOfResendVerifyEmail } from "./routeOfResendVerifyEmail";
+import { routeOfResetPassword } from "./routeOfResetPassword";
+import { routeOfBan } from "./routeOfBan";
+import { routeOfUnban } from "./routeOfUnban";
+import { routeOfVerifyEmail } from "./routeOfVerifyEmail";
+import { routeOfDeleteAccount } from "./routeOfDeleteAccount";
+import { routeOfChangeAccountPassword } from "./routeOfChangeAccountPassword";
+import { routeOfChangeCredsRequest } from "./routeOfChangeCredsRequest";
+import { routeOfChangeCredsConfirm } from "./routeOfChangeCredsConfrim";
+import { routeOfSendContactForm } from "./routeOfSendContactForm";
+import { routeOfLoginByToken } from "@/routes/user/routeOfLoginByToken";
+import { routeOfUpdateUser } from "@/routes/user/routeOfUpdateUser";
+
+export const userRoutes: FastifyPluginAsync = async (fastify) => {
+  fastify.register(routeOfChangePassword);
+  fastify.register(routeOfGetUserById);
+  fastify.register(routeOfLogin);
+  fastify.register(routeOfMyInfo);
+  fastify.register(routeOfRegister);
+  fastify.register(routeOfResendVerifyEmail);
+  fastify.register(routeOfResetPassword);
+  fastify.register(routeOfBan);
+  fastify.register(routeOfUnban);
+  fastify.register(routeOfVerifyEmail);
+  fastify.register(routeOfDeleteAccount);
+  fastify.register(routeOfChangeAccountPassword);
+  fastify.register(routeOfChangeCredsRequest);
+  fastify.register(routeOfChangeCredsConfirm);
+  fastify.register(routeOfSendContactForm);
+  fastify.register(routeOfLoginByToken);
+  fastify.register(routeOfUpdateUser);
+};

@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: 229425579640.dkr.ecr.ap-southeast-2.amazonaws.com/mcr_frontend:dev
+    build:
+      target: production
+    command: node ./dist/node-server/index.js
+
+  backend:
+    image: 229425579640.dkr.ecr.ap-southeast-2.amazonaws.com/mcr_backend:dev
+    build:
+      target: production
+    command: node dist/index.js
